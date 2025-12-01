@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethan Pougary - Créateur UGC & Digital</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- RESET ET BASE --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0a0a0a; /* Fond noir profond */
+            color: #f0f0f0;
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: 0.3s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* --- UTILITAIRES --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #ffffff;
+            color: #000000;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            margin-top: 20px;
+        }
+
+        .btn:hover {
+            background-color: #cccccc;
+            transform: translateY(-2px);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        /* --- HEADER --- */
+        header {
+            padding: 20px 0;
+            position: absolute; /* Pour flotter sur le hero */
+            width: 100%;
+            top: 0;
+            z-index: 10;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+        }
+
+        .nav-links a {
+            margin-left: 30px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            background: radial-gradient(circle at top right, #1e1e1e, #0a0a0a);
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .hero-text span {
+            display: block;
+            font-size: 1.2rem;
+            color: #888;
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            color: #ccc;
+            margin-bottom: 30px;
+            max-width: 500px;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 450px;
+            border-radius: 20px;
+            /* Effet ombre portée */
+            box-shadow: 0 20px 50px rgba(255, 255, 255, 0.05);
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* --- MARQUES (Preuve Sociale) --- */
+        .brands {
+            background-color: #111;
+            padding: 40px 0;
+            border-top: 1px solid #222;
+            border-bottom: 1px solid #222;
+        }
+
+        .brands p {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #666;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        .logos-grid {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            opacity: 0.7;
+        }
+        
+        .brand-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        /* --- SERVICES --- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: #141414;
+            padding: 40px;
+            border-radius: 10px;
+            border: 1px solid #222;
+            transition: 0.3s;
+        }
+
+        .service-card:hover {
+            border-color: #444;
+            transform: translateY(-5px);
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .service-card ul {
+            margin-top: 20px;
+        }
+
+        .service-card li {
+            margin-bottom: 10px;
+            color: #aaa;
+            font-size: 0.95rem;
+        }
+
+        .service-card li::before {
+            content: "•";
+            color: #fff;
+            margin-right: 10px;
+        }
+
+        /* --- PORTFOLIO (Vidéos) --- */
+        .portfolio-tabs {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .tab-btn {
+            background: none;
+            border: 1px solid #333;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            margin: 0 5px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .tab-btn.active {
+            background: #fff;
+            color: #000;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 40px;
+            justify-items: center;
+        }
+
+        /* Simulation Mockup Téléphone */
+        .phone-mockup {
+            width: 250px;
+            height: 480px; /* Ratio approx 9:16 */
+            background-color: #222;
+            border-radius: 35px;
+            border: 8px solid #333;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: 0.3s;
+        }
+        
+        .phone-mockup:hover {
+             border-color: #555;
+        }
+
+        .phone-content {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Placeholder couleur en attendant la vidéo */
+            background: linear-gradient(45deg, #2c3e50, #000); 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-size: 0.8rem;
+        }
+
+        .project-info {
+            text-align: center;
+            margin-top: 15px;
+        }
+        
+        .project-title {
+            font-weight: 600;
+            display: block;
+        }
+        
+        .project-client {
+            color: #777;
+            font-size: 0.85rem;
+        }
+
+        /* --- ABOUT --- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        
+        .about-text p {
+            margin-bottom: 15px;
+            color: #bbb;
+        }
+
+        /* --- FOOTER / CONTACT --- */
+        .cta-section {
+            background: linear-gradient(to right, #1a1a1a, #0d0d0d);
+            text-align: center;
+        }
+        
+        .contact-methods {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .contact-item {
+            background: #222;
+            padding: 20px 30px;
+            border-radius: 10px;
+            min-width: 200px;
+        }
+        
+        .contact-item h4 {
+            margin-bottom: 5px;
+        }
+        
+        .contact-item span {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            font-size: 0.8rem;
+            color: #555;
+            border-top: 1px solid #1a1a1a;
+        }
+
+        /* --- RESPONSIVE MOBILE --- */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 30px;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-image img {
+                max-width: 80%;
+            }
+            
+            .hero-text p {
+                margin: 0 auto 30px auto;
+            }
+            
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                display: none; /* Menu burger à implémenter si besoin */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="container">
+        <nav>
+            <div class="logo">Ethan Pougary</div>
+            <div class="nav-links">
+                <a href="#services">Services</a>
+                <a href="#portfolio">Réalisations</a>
+                <a href="#about">À propos</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <span>Créateur de Contenu UGC</span>
+                <h1>Transformez votre audience en clients.</h1>
+                <p>Spécialisé Sport, Nutrition & Lifestyle. Je crée des vidéos authentiques qui captivent et convertissent pour vos campagnes TikTok & Meta.</p>
+                <a href="#contact" class="btn">Lancer votre projet</a>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Ethan Pougary Portrait">
+            </div>
+        </div>
+    </section>
+
+    <section class="brands">
+        <div class="container">
+            <p>Ils m'ont fait confiance</p>
+            <div class="logos-grid">
+                <div class="brand-name">LA BOUTIQUE OFFICIELLE</div>
+                <div class="brand-name">ERIC FAVRE</div>
+                <div class="brand-name">BRENNOS</div>
+                <div class="brand-name">ALLUP</div>
+                <div class="brand-name">COREFITE</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="section-padding container">
+        <h2 class="section-title">Mes Expertises</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>Vidéos UGC (Ads)</h3>
+                <p>Des vidéos performantes conçues pour la publicité payante (TikTok Ads, Meta Ads).</p>
+                <ul>
+                    <li>Scripts basés sur des Hooks forts</li>
+                    <li>Format vertical 9:16 optimisé</li>
+                    <li>Montage dynamique</li>
+                    <li>Droit à l'image inclus (3 mois)</li>
+                </ul>
+            </div>
+            <div class="service-card">
+                <h3>Organique & Reels</h3>
+                <p>Du contenu engageant pour animer votre communauté et fidéliser votre audience.</p>
+                <ul>
+                    <li>Vlogs & Lifestyle</li>
+                    <li>Témoignages & Avis produits</li>
+                    <li>Unboxing esthétique</li>
+                    <li>Storytelling authentique</li>
+                </ul>
+            </div>
+            <div class="service-card">
+                <h3>Photographie</h3>
+                <p>Des visuels de haute qualité pour votre site web, fiches produits ou réseaux.</p>
+                <ul>
+                    <li>Mise en scène produit</li>
+                    <li>Shooting Lifestyle / Salle de sport</li>
+                    <li>Retouches professionnelles</li>
+                    <li>Pack de 10 à 30 photos</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="section-padding container">
+        <h2 class="section-title">Réalisations Récentes</h2>
+        
+        <div class="portfolio-tabs">
+            <button class="tab-btn active">Tout</button>
+            <button class="tab-btn">Publicités</button>
+            <button class="tab-btn">Organique</button>
+        </div>
+
+        <div class="portfolio-grid">
+            <div>
+                <div class="phone-mockup">
+                    <div class="phone-content">
+                        <span>Vidéo Eric Favre</span>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <span class="project-title">Crash Test Produit</span>
+                    <span class="project-client">Eric Favre Nutrition</span>
+                </div>
+            </div>
+
+            <div>
+                <div class="phone-mockup">
+                    <div class="phone-content">
+                        <span>Vidéo Boutique Off</span>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <span class="project-title">Unboxing Streetwear</span>
+                    <span class="project-client">La Boutique Officielle</span>
+                </div>
+            </div>
+
+            <div>
+                <div class="phone-mockup">
+                    <div class="phone-content">
+                        <span>Vidéo Brennos</span>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <span class="project-title">Routine Santé</span>
+                    <span class="project-client">Brennos</span>
+                </div>
+            </div>
+             <div>
+                <div class="phone-mockup">
+                    <div class="phone-content">
+                        <span>Vidéo OffVoice</span>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <span class="project-title">Voix Off / Story</span>
+                    <span class="project-client">Pokey Bar</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section-padding" style="background-color: #0f0f0f;">
+        <div class="container about-grid">
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Gym Lifestyle" style="width: 100%; border-radius: 10px; opacity: 0.8;">
+            </div>
+            <div class="about-text">
+                <h3>Qui suis-je ?</h3>
+                <p><strong>Ethan - 21 ans - Basé à Colmar/Strasbourg (Disponible France entière)</strong></p>
+                <p>Passionné par le sport, la nutrition, le voyage et le lifestyle. J’aime raconter des histoires à travers des visuels authentiques, esthétiques et porteurs de sens.</p>
+                <p>Mon objectif : sublimer les expériences, les lieux et les marques qui inspirent le mouvement et l’équilibre.</p>
+                <p>Je ne me contente pas de filmer un produit, je le mets en situation dans un quotidien inspirant.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section-padding cta-section">
+        <div class="container">
+            <h2 class="section-title">Prêt à collaborer ?</h2>
+            <p style="max-width: 600px; margin: 0 auto; color: #ccc;">Envoyez-moi un mail en m'expliquant vos besoins ou réservez un appel découverte pour discuter de votre stratégie UGC.</p>
+            
+            <div class="contact-methods">
+                <a href="mailto:ethanpougary29@gmail.com" class="contact-item">
+                    <h4>Email</h4>
+                    <span>ethanpougary29@gmail.com</span>
+                </a>
+                <a href="https://instagram.com/ethaaann.pgr" target="_blank" class="contact-item">
+                    <h4>Instagram</h4>
+                    <span>@ethaaann.pgr</span>
+                </a>
+                <a href="https://tiktok.com/@ethaaann.pgr" target="_blank" class="contact-item">
+                    <h4>TikTok</h4>
+                    <span>@ethaaann.pgr</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Ethan Pougary. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+</body>
+</html>s
