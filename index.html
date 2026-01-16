@@ -1,569 +1,432 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ethan Pougary - Créateur UGC & Digital</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    
+    <title>Fanny UGC | Portfolio 2025</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
     <style>
-        /* --- RESET ET BASE --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* --- VARIABLES & THEME --- */
+        :root[data-theme="light"] {
+            --bg: #F8F9FD;
+            --card: #FFFFFF;
+            --text: #1A1A1A;
+            --text-light: #6B7280;
+            --primary: #8B3DFF;
+            --primary-soft: #F1E9FF;
+            --border: #E5E7EB;
+            --badge-bg: #F3F4F6;
         }
 
-        body {
-            background-color: #0a0a0a; /* Fond noir profond */
-            color: #f0f0f0;
-            font-family: 'Montserrat', sans-serif;
-            line-height: 1.6;
+        :root[data-theme="dark"] {
+            --bg: #0F0F12;
+            --card: #1C1C21;
+            --text: #F9FAFB;
+            --text-light: #9CA3AF;
+            --primary: #A370FF;
+            --primary-soft: #2D2640;
+            --border: #2D2D35;
+            --badge-bg: #2A2A35;
         }
 
-        h1, h2, h3, h4 {
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-            transition: 0.3s;
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        /* --- UTILITAIRES --- */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: #ffffff;
-            color: #000000;
-            padding: 12px 30px;
-            border-radius: 50px;
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            margin-top: 20px;
-        }
-
-        .btn:hover {
-            background-color: #cccccc;
-            transform: translateY(-2px);
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-padding {
-            padding: 80px 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background-color: var(--bg); color: var(--text); transition: background 0.3s ease, color 0.3s ease; }
+        html { scroll-behavior: smooth; }
 
         /* --- HEADER --- */
         header {
-            padding: 20px 0;
-            position: absolute; /* Pour flotter sur le hero */
-            width: 100%;
-            top: 0;
-            z-index: 10;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1rem 5%; position: sticky; top: 0; z-index: 1000;
+            background: rgba(var(--bg), 0.9); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border);
         }
+        .logo { font-weight: 800; font-size: 1.5rem; color: var(--primary); letter-spacing: -0.5px; display: flex; align-items: center; gap: 0.5rem; }
+        .nav-links { display: flex; gap: 1.5rem; align-items: center; }
+        .nav-links a { text-decoration: none; color: var(--text); font-weight: 600; font-size: 0.9rem; transition: 0.2s; }
+        .nav-links a:hover { color: var(--primary); }
+        .theme-btn {
+            background: var(--primary-soft); color: var(--primary); border: none;
+            padding: 0.6rem 1.2rem; border-radius: 50px; cursor: pointer; font-weight: 700; font-size: 0.8rem;
+            display: flex; align-items: center; gap: 0.5rem; transition: 0.2s;
+        }
+        .theme-btn:hover { transform: scale(1.05); }
 
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        /* --- HERO --- */
+        .hero { padding: 6rem 5% 4rem; text-align: center; max-width: 1100px; margin: auto; }
+        .pill { 
+            background: var(--primary-soft); color: var(--primary); display: inline-flex; align-items: center; gap: 0.5rem;
+            padding: 0.5rem 1rem; border-radius: 50px; font-weight: 700; font-size: 0.75rem; 
+            margin-bottom: 1.5rem; letter-spacing: 1px;
         }
+        .hero h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800; line-height: 1.1; margin-bottom: 1.5rem; }
+        .hero span { color: var(--primary); }
+        .hero p { font-size: 1.2rem; color: var(--text-light); max-width: 700px; margin: 0 auto 2.5rem; }
 
-        .logo {
-            font-size: 1.5rem;
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
+        /* --- SECTION A PROPOS (AVEC PHOTO) --- */
+        .about-section {
+            padding: 4rem 5%; max-width: 1100px; margin: auto;
+            display: grid; grid-template-columns: 1fr 1.5fr; gap: 4rem; align-items: center;
         }
-
-        .nav-links a {
-            margin-left: 30px;
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-
-        .nav-links a:hover {
-            opacity: 1;
-            text-decoration: underline;
-        }
-
-        /* --- HERO SECTION --- */
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            background: radial-gradient(circle at top right, #1e1e1e, #0a0a0a);
-        }
-
-        .hero-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
-        }
-
-        .hero-text h1 {
-            font-size: 3.5rem;
-            line-height: 1.2;
-            margin-bottom: 20px;
-        }
-
-        .hero-text span {
-            display: block;
-            font-size: 1.2rem;
-            color: #888;
-            font-family: 'Montserrat', sans-serif;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .hero-text p {
-            font-size: 1.1rem;
-            color: #ccc;
-            margin-bottom: 30px;
-            max-width: 500px;
-        }
-
-        .hero-image img {
-            width: 100%;
-            max-width: 450px;
-            border-radius: 20px;
-            /* Effet ombre portée */
-            box-shadow: 0 20px 50px rgba(255, 255, 255, 0.05);
-            display: block;
-            margin: 0 auto;
-        }
-
-        /* --- MARQUES (Preuve Sociale) --- */
-        .brands {
-            background-color: #111;
-            padding: 40px 0;
-            border-top: 1px solid #222;
-            border-bottom: 1px solid #222;
-        }
-
-        .brands p {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #666;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            letter-spacing: 1px;
-        }
-
-        .logos-grid {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            flex-wrap: wrap;
-            opacity: 0.7;
-        }
-        
-        .brand-name {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #fff;
-        }
-
-        /* --- SERVICES --- */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .service-card {
-            background: #141414;
-            padding: 40px;
-            border-radius: 10px;
-            border: 1px solid #222;
-            transition: 0.3s;
-        }
-
-        .service-card:hover {
-            border-color: #444;
-            transform: translateY(-5px);
-        }
-
-        .service-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-        }
-
-        .service-card ul {
-            margin-top: 20px;
-        }
-
-        .service-card li {
-            margin-bottom: 10px;
-            color: #aaa;
-            font-size: 0.95rem;
-        }
-
-        .service-card li::before {
-            content: "•";
-            color: #fff;
-            margin-right: 10px;
-        }
-
-        /* --- PORTFOLIO (Vidéos) --- */
-        .portfolio-tabs {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        
-        .tab-btn {
-            background: none;
-            border: 1px solid #333;
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 30px;
-            cursor: pointer;
-            margin: 0 5px;
-            font-family: 'Montserrat', sans-serif;
-        }
-        
-        .tab-btn.active {
-            background: #fff;
-            color: #000;
-        }
-
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 40px;
-            justify-items: center;
-        }
-
-        /* Simulation Mockup Téléphone */
-        .phone-mockup {
-            width: 250px;
-            height: 480px; /* Ratio approx 9:16 */
-            background-color: #222;
-            border-radius: 35px;
-            border: 8px solid #333;
+        .about-img-container {
             position: relative;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        /* Style de l'image : Cadre + Ombre portée violette */
+        .about-img {
+            width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 30px;
+            box-shadow: 15px 15px 0px var(--primary-soft); 
+            border: 1px solid var(--border);
             transition: 0.3s;
         }
+        .about-img:hover { transform: scale(1.02); box-shadow: 20px 20px 0px var(--primary); }
+
+        .about-text h2 { font-size: 2rem; font-weight: 800; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem; }
+        .about-text p { margin-bottom: 1rem; color: var(--text-light); line-height: 1.7; font-size: 1.05rem; }
         
-        .phone-mockup:hover {
-             border-color: #555;
+        /* Stats intégrées */
+        .about-stats {
+            display: flex; gap: 2rem; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border);
+        }
+        .stat-item strong { display: block; font-size: 1.8rem; color: var(--primary); font-weight: 800; line-height: 1; margin-bottom: 0.3rem; }
+        .stat-item span { font-size: 0.85rem; color: var(--text-light); text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; }
+
+        /* --- CATEGORY TABS --- */
+        .cat-nav { 
+            display: flex; justify-content: center; flex-wrap: wrap; gap: 0.8rem; margin: 4rem 0; padding: 0 5%;
+        }
+        .cat-btn {
+            background: var(--card); border: 1px solid var(--border); padding: 0.8rem 1.5rem;
+            border-radius: 12px; font-weight: 700; cursor: pointer; text-decoration: none; color: var(--text);
+            transition: 0.2s; font-size: 0.9rem; display: flex; align-items: center; gap: 0.6rem;
+        }
+        .cat-btn i { font-size: 1.2rem; color: var(--primary); }
+        .cat-btn:hover { border-color: var(--primary); transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+
+        /* --- SECTIONS PORTFOLIO --- */
+        .category-section { padding: 4rem 5%; border-top: 1px solid var(--border); }
+        .cat-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; }
+        .cat-icon-box { 
+            width: 50px; height: 50px; background: var(--primary-soft); border-radius: 12px; 
+            display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 1.5rem;
+        }
+        .cat-title { font-size: 2rem; font-weight: 800; }
+        
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+        
+        /* --- VIDEO CARD --- */
+        .video-card { 
+            background: var(--card); border-radius: 24px; overflow: hidden; border: 1px solid var(--border);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02); transition: 0.3s;
+        }
+        .video-card:hover { transform: translateY(-5px); border-color: var(--primary); box-shadow: 0 10px 30px rgba(139, 61, 255, 0.1); }
+        .video-wrapper { aspect-ratio: 9/16; background: #000; position: relative; width: 100%; }
+        video { width: 100%; height: 100%; object-fit: cover; }
+        .card-info { padding: 1.5rem; }
+        .card-info h3 { font-size: 1.1rem; margin-bottom: 0.5rem; font-weight: 700; }
+        .card-info p { color: var(--text-light); font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem; }
+        .tag { 
+            font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: var(--primary);
+            background: var(--badge-bg); padding: 4px 10px; border-radius: 6px; display: inline-block; margin-bottom: 0.8rem;
         }
 
-        .phone-content {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            /* Placeholder couleur en attendant la vidéo */
-            background: linear-gradient(45deg, #2c3e50, #000); 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #fff;
-            font-size: 0.8rem;
-        }
+        /* --- PRICING --- */
+        .pricing-section { background: var(--primary-soft); padding: 6rem 5%; margin-top: 4rem; border-radius: 60px 60px 0 0; }
+        .pricing-container { max-width: 1000px; margin: auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; }
+        .price-card { background: var(--card); padding: 2.5rem; border-radius: 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.05); transition: 0.3s; }
+        .price-card:hover { transform: translateY(-5px); }
+        .price-list div { display: flex; justify-content: space-between; padding: 1rem 0; border-bottom: 1px solid var(--border); font-weight: 500; font-size: 0.95rem; }
+        .price-list div:last-child { border-bottom: none; }
+        .price-list strong { color: var(--primary); font-size: 1.1rem; }
+        .price-icon { font-size: 1.5rem; color: var(--primary); margin-bottom: 1rem; }
 
-        .project-info {
-            text-align: center;
-            margin-top: 15px;
+        /* --- FOOTER --- */
+        footer { background: var(--card); padding: 5rem 5%; text-align: center; border-top: 1px solid var(--border); }
+        .cta-main { 
+            background: var(--primary); color: white; padding: 1.2rem 3rem; border-radius: 100px; 
+            text-decoration: none; font-weight: 800; font-size: 1.1rem; display: inline-flex; align-items: center; gap: 0.8rem; transition: 0.3s;
+            box-shadow: 0 10px 25px rgba(139, 61, 255, 0.25);
         }
-        
-        .project-title {
-            font-weight: 600;
-            display: block;
-        }
-        
-        .project-client {
-            color: #777;
-            font-size: 0.85rem;
-        }
+        .cta-main:hover { transform: scale(1.02); box-shadow: 0 15px 35px rgba(139, 61, 255, 0.4); }
 
-        /* --- ABOUT --- */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 50px;
-            align-items: center;
-        }
-        
-        .about-text h3 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-        }
-        
-        .about-text p {
-            margin-bottom: 15px;
-            color: #bbb;
-        }
-
-        /* --- FOOTER / CONTACT --- */
-        .cta-section {
-            background: linear-gradient(to right, #1a1a1a, #0d0d0d);
-            text-align: center;
-        }
-        
-        .contact-methods {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 40px;
-            flex-wrap: wrap;
-        }
-        
-        .contact-item {
-            background: #222;
-            padding: 20px 30px;
-            border-radius: 10px;
-            min-width: 200px;
-        }
-        
-        .contact-item h4 {
-            margin-bottom: 5px;
-        }
-        
-        .contact-item span {
-            color: #888;
-            font-size: 0.9rem;
-        }
-
-        footer {
-            text-align: center;
-            padding: 30px;
-            font-size: 0.8rem;
-            color: #555;
-            border-top: 1px solid #1a1a1a;
-        }
-
-        /* --- RESPONSIVE MOBILE --- */
         @media (max-width: 768px) {
-            .hero-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-                gap: 30px;
-            }
-            
-            .hero-text h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero-image img {
-                max-width: 80%;
-            }
-            
-            .hero-text p {
-                margin: 0 auto 30px auto;
-            }
-            
-            .about-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .nav-links {
-                display: none; /* Menu burger à implémenter si besoin */
-            }
+            .hero h1 { font-size: 2.5rem; }
+            .nav-links { display: none; }
+            .about-section { grid-template-columns: 1fr; text-align: center; }
+            .about-img { width: 70%; margin: auto; display: block; }
+            .about-stats { justify-content: center; }
         }
     </style>
 </head>
 <body>
 
-    <header class="container">
-        <nav>
-            <div class="logo">Ethan Pougary</div>
-            <div class="nav-links">
-                <a href="#services">Services</a>
-                <a href="#portfolio">Réalisations</a>
-                <a href="#about">À propos</a>
-                <a href="#contact">Contact</a>
-            </div>
-        </nav>
+    <header>
+        <div class="logo">
+            <i class="ph-bold ph-video-camera"></i>
+            FANNY UGC.
+        </div>
+        <div class="nav-links">
+            <a href="#about">À propos</a>
+            <a href="#portfolio">Portfolio</a>
+            <a href="#tarifs">Tarifs</a>
+        </div>
+        <button class="theme-btn" id="themeBtn">
+            <i class="ph-fill ph-moon"></i> Mode Sombre
+        </button>
     </header>
 
     <section class="hero">
-        <div class="container hero-content">
-            <div class="hero-text">
-                <span>Créateur de Contenu UGC</span>
-                <h1>Transformez votre audience en clients.</h1>
-                <p>Spécialisé Sport, Nutrition & Lifestyle. Je crée des vidéos authentiques qui captivent et convertissent pour vos campagnes TikTok & Meta.</p>
-                <a href="#contact" class="btn">Lancer votre projet</a>
-            </div>
-            <div class="hero-image">
-                <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Ethan Pougary Portrait">
-            </div>
+        <div class="pill"><i class="ph-bold ph-star"></i> PORTFOLIO & STRATÉGIE</div>
+        <h1>Créons du contenu qui <br><span>convertit vraiment.</span></h1>
+        <p>J'accompagne les marques ambitieuses avec des vidéos authentiques, performantes et esthétiques.</p>
+        <div style="margin-top: 2rem;">
+            <a href="#portfolio" class="cta-main">Voir mes vidéos</a>
         </div>
     </section>
 
-    <section class="brands">
-        <div class="container">
-            <p>Ils m'ont fait confiance</p>
-            <div class="logos-grid">
-                <div class="brand-name">LA BOUTIQUE OFFICIELLE</div>
-                <div class="brand-name">ERIC FAVRE</div>
-                <div class="brand-name">BRENNOS</div>
-                <div class="brand-name">ALLUP</div>
-                <div class="brand-name">COREFITE</div>
-            </div>
+    <section id="about" class="about-section">
+        <div class="about-img-container">
+            <img src="fanny.png" alt="Fanny UGC" class="about-img">
         </div>
-    </section>
-
-    <section id="services" class="section-padding container">
-        <h2 class="section-title">Mes Expertises</h2>
-        <div class="services-grid">
-            <div class="service-card">
-                <h3>Vidéos UGC (Ads)</h3>
-                <p>Des vidéos performantes conçues pour la publicité payante (TikTok Ads, Meta Ads).</p>
-                <ul>
-                    <li>Scripts basés sur des Hooks forts</li>
-                    <li>Format vertical 9:16 optimisé</li>
-                    <li>Montage dynamique</li>
-                    <li>Droit à l'image inclus (3 mois)</li>
-                </ul>
-            </div>
-            <div class="service-card">
-                <h3>Organique & Reels</h3>
-                <p>Du contenu engageant pour animer votre communauté et fidéliser votre audience.</p>
-                <ul>
-                    <li>Vlogs & Lifestyle</li>
-                    <li>Témoignages & Avis produits</li>
-                    <li>Unboxing esthétique</li>
-                    <li>Storytelling authentique</li>
-                </ul>
-            </div>
-            <div class="service-card">
-                <h3>Photographie</h3>
-                <p>Des visuels de haute qualité pour votre site web, fiches produits ou réseaux.</p>
-                <ul>
-                    <li>Mise en scène produit</li>
-                    <li>Shooting Lifestyle / Salle de sport</li>
-                    <li>Retouches professionnelles</li>
-                    <li>Pack de 10 à 30 photos</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <section id="portfolio" class="section-padding container">
-        <h2 class="section-title">Réalisations Récentes</h2>
-        
-        <div class="portfolio-tabs">
-            <button class="tab-btn active">Tout</button>
-            <button class="tab-btn">Publicités</button>
-            <button class="tab-btn">Organique</button>
-        </div>
-
-        <div class="portfolio-grid">
-            <div>
-                <div class="phone-mockup">
-                    <div class="phone-content">
-                        <span>Vidéo Eric Favre</span>
-                    </div>
-                </div>
-                <div class="project-info">
-                    <span class="project-title">Crash Test Produit</span>
-                    <span class="project-client">Eric Favre Nutrition</span>
-                </div>
-            </div>
-
-            <div>
-                <div class="phone-mockup">
-                    <div class="phone-content">
-                        <span>Vidéo Boutique Off</span>
-                    </div>
-                </div>
-                <div class="project-info">
-                    <span class="project-title">Unboxing Streetwear</span>
-                    <span class="project-client">La Boutique Officielle</span>
-                </div>
-            </div>
-
-            <div>
-                <div class="phone-mockup">
-                    <div class="phone-content">
-                        <span>Vidéo Brennos</span>
-                    </div>
-                </div>
-                <div class="project-info">
-                    <span class="project-title">Routine Santé</span>
-                    <span class="project-client">Brennos</span>
-                </div>
-            </div>
-             <div>
-                <div class="phone-mockup">
-                    <div class="phone-content">
-                        <span>Vidéo OffVoice</span>
-                    </div>
-                </div>
-                <div class="project-info">
-                    <span class="project-title">Voix Off / Story</span>
-                    <span class="project-client">Pokey Bar</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="about" class="section-padding" style="background-color: #0f0f0f;">
-        <div class="container about-grid">
-            <div class="about-image">
-                <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Gym Lifestyle" style="width: 100%; border-radius: 10px; opacity: 0.8;">
-            </div>
-            <div class="about-text">
-                <h3>Qui suis-je ?</h3>
-                <p><strong>Ethan - 21 ans - Basé à Colmar/Strasbourg (Disponible France entière)</strong></p>
-                <p>Passionné par le sport, la nutrition, le voyage et le lifestyle. J’aime raconter des histoires à travers des visuels authentiques, esthétiques et porteurs de sens.</p>
-                <p>Mon objectif : sublimer les expériences, les lieux et les marques qui inspirent le mouvement et l’équilibre.</p>
-                <p>Je ne me contente pas de filmer un produit, je le mets en situation dans un quotidien inspirant.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="section-padding cta-section">
-        <div class="container">
-            <h2 class="section-title">Prêt à collaborer ?</h2>
-            <p style="max-width: 600px; margin: 0 auto; color: #ccc;">Envoyez-moi un mail en m'expliquant vos besoins ou réservez un appel découverte pour discuter de votre stratégie UGC.</p>
+        <div class="about-text">
+            <h2><i class="ph-fill ph-hand-waving"></i> Hello, moi c'est Fanny !</h2>
+            <p><strong>Experte en création de contenu depuis plus de 5 ans</strong>, je ne me contente pas de filmer : j'analyse, je script et je crée des stratégies qui marchent.</p>
+            <p>Mon profil 360° (Créatrice, Réalisatrice, Copywriter) me permet de faire le lien entre la vision de votre marque et la réalité du terrain. Que ce soit dans mon jardin à Paris ou ma maison en Corse, je crée des décors authentiques pour vos produits.</p>
             
-            <div class="contact-methods">
-                <a href="mailto:ethanpougary29@gmail.com" class="contact-item">
-                    <h4>Email</h4>
-                    <span>ethanpougary29@gmail.com</span>
-                </a>
-                <a href="https://instagram.com/ethaaann.pgr" target="_blank" class="contact-item">
-                    <h4>Instagram</h4>
-                    <span>@ethaaann.pgr</span>
-                </a>
-                <a href="https://tiktok.com/@ethaaann.pgr" target="_blank" class="contact-item">
-                    <h4>TikTok</h4>
-                    <span>@ethaaann.pgr</span>
-                </a>
+            <p style="font-size: 0.95rem; margin-top: 1rem; color: var(--primary); font-weight: 600;">
+                <i class="ph-fill ph-paw-print"></i> <em>Assistée par ma Staffy de 5 ans pour les campagnes animaux !</em>
+            </p>
+            
+            <div class="about-stats">
+                <div class="stat-item"><strong>+2.7k</strong><span>Abonnés</span></div>
+                <div class="stat-item"><strong>5 Ans</strong><span>Expérience</span></div>
+                <div class="stat-item"><strong>360°</strong><span>Vision</span></div>
             </div>
+        </div>
+    </section>
+
+    <div class="cat-nav" id="portfolio">
+        <a href="#beaute" class="cat-btn"><i class="ph-fill ph-sparkle"></i> Beauté</a>
+        <a href="#appli" class="cat-btn"><i class="ph-fill ph-device-mobile"></i> Appli</a>
+        <a href="#food" class="cat-btn"><i class="ph-fill ph-hamburger"></i> Food</a>
+        <a href="#animaux" class="cat-btn"><i class="ph-fill ph-paw-print"></i> Animaux</a>
+        <a href="#lifestyle" class="cat-btn"><i class="ph-fill ph-house-line"></i> Lifestyle</a>
+        <a href="#outdoor" class="cat-btn"><i class="ph-fill ph-plant"></i> Outdoor</a>
+    </div>
+
+    <section id="beaute" class="category-section">
+        <div class="cat-header">
+            <div class="cat-icon-box"><i class="ph-fill ph-sparkle"></i></div>
+            <h2 class="cat-title">Beauté & Skincare</h2>
+        </div>
+        <div class="grid-3">
+            <div class="video-card">
+                <div class="video-wrapper"><video controls poster="img/thumb1.jpg"><source src="video-beaute-1.mp4" type="video/mp4"></video></div>
+                <div class="card-info">
+                    <span class="tag">Skincare</span>
+                    <h3>Routine Matin - Marque X</h3>
+                    <p><i class="ph ph-check-circle"></i> Hook ASMR + Application texture</p>
+                </div>
+            </div>
+            <div class="video-card">
+                <div class="video-wrapper"><video controls><source src="video-beaute-2.mp4" type="video/mp4"></video></div>
+                <div class="card-info">
+                    <span class="tag">Maquillage</span>
+                    <h3>Tuto "Get Ready With Me"</h3>
+                    <p><i class="ph ph-microphone-stage"></i> Voix-off narrative storytelling</p>
+                </div>
+            </div>
+            <div class="video-card">
+                <div class="video-wrapper"><video controls><source src="video-beaute-3.mp4" type="video/mp4"></video></div>
+                <div class="card-info">
+                    <span class="tag">Cheveux</span>
+                    <h3>Avant / Après SharkBeauty</h3>
+                    <p><i class="ph ph-lightning"></i> Montage dynamique rapide</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="appli" class="category-section">
+        <div class="cat-header">
+            <div class="cat-icon-box"><i class="ph-fill ph-device-mobile"></i></div>
+            <h2 class="cat-title">Applications & Tech</h2>
+        </div>
+        <div class="grid-3">
+            <div class="video-card">
+                <div class="video-wrapper"><video controls><source src="video-app-1.mp4" type="video/mp4"></video></div>
+                <div class="card-info">
+                    <span class="tag">Rencontre</span>
+                    <h3>Fruitz - Témoignage</h3>
+                    <p><i class="ph ph-user-focus"></i> Face caméra authentique</p>
+                </div>
+            </div>
+            <div class="video-card">
+                <div class="video-wrapper"><video controls><source src="video-app-2.mp4" type="video/mp4"></video></div>
+                <div class="card-info">
+                    <span class="tag">Éducation</span>
+                    <h3>Headway - Démo UI</h3>
+                    <p><i class="ph ph-screencast"></i> Green screen + capture d'écran</p>
+                </div>
+            </div>
+            <div class="video-card">
+                <div class="video-wrapper"><video controls><source src="video-app-3.mp4" type="video/mp4"></video></div>
+                <div class="card-info">
+                    <span class="tag">Service</span>
+                    <h3>App Bancaire</h3>
+                    <p><i class="ph ph-lightbulb"></i> Problème / Solution</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="food" class="category-section">
+        <div class="cat-header">
+            <div class="cat-icon-box"><i class="ph-fill ph-hamburger"></i></div>
+            <h2 class="cat-title">Food & Restauration</h2>
+        </div>
+        <div class="grid-3">
+            <div class="video-card">
+                <div class="video-wrapper"><video controls><source src="video-food-1.mp4" type="video/mp4"></video></div>
+                <div class="card-info"><span class="tag">Restaurant</span><h3>Visite de lieu - Paris</h3><p><i class="ph ph-video"></i> Vlog immersif POV</p></div>
+            </div>
+            <div class="video-card">
+                <div class="video-wrapper"><video controls><source src="video-food-2.mp4" type="video/mp4"></video></div>
+                <div class="card-info"><span class="tag">Produit</span><h3>Recette Simple - Benco</h3><p><i class="ph ph-music-note"></i> Montage rythmé musique</p></div>
+            </div>
+            <div class="video-card">
+                <div class="video-wrapper"><video controls><source src="video-food-3.mp4" type="video/mp4"></video></div>
+                <div class="card-info"><span class="tag">Livraison</span><h3>Unboxing Repas</h3><p><i class="ph ph-smiley"></i> Dégustation et réaction</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="animaux" class="category-section">
+        <div class="cat-header">
+            <div class="cat-icon-box"><i class="ph-fill ph-paw-print"></i></div>
+            <h2 class="cat-title">Animaux (Pets)</h2>
+        </div>
+        <div class="grid-3">
+            <div class="video-card">
+                <div class="video-wrapper"><video controls><source src="video-pet-1.mp4" type="video/mp4"></video></div>
+                <div class="card-info"><span class="tag">Chien</span><h3>Routine Promenade</h3><p><i class="ph ph-heart"></i> Avec ma Staffy de 5 ans</p></div>
+            </div>
+            <div class="video-card">
+                <div class="video-wrapper"><video controls><source src="video-pet-2.mp4" type="video/mp4"></video></div>
+                <div class="card-info"><span class="tag">Alimentation</span><h3>Test Croquettes Elmut</h3><p><i class="ph ph-check"></i> Réaction de l'animal</p></div>
+            </div>
+            <div class="video-card">
+                <div class="video-wrapper"><video controls><source src="video-pet-3.mp4" type="video/mp4"></video></div>
+                <div class="card-info"><span class="tag">Accessoire</span><h3>Jouet Interactif</h3><p><i class="ph ph-play-circle"></i> Démonstration d'utilisation</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="lifestyle" class="category-section">
+        <div class="cat-header">
+            <div class="cat-icon-box"><i class="ph-fill ph-house-line"></i></div>
+            <h2 class="cat-title">Lifestyle & Maison</h2>
+        </div>
+        <div class="grid-3">
+            <div class="video-card">
+                <div class="video-wrapper"><video controls><source src="video-life-1.mp4" type="video/mp4"></video></div>
+                <div class="card-info"><span class="tag">Ménage</span><h3>Aspirateur Tineco</h3><p><i class="ph ph-drop"></i> Test extrême sur saletés</p></div>
+            </div>
+            <div class="video-card">
+                <div class="video-wrapper"><video controls><source src="video-life-2.mp4" type="video/mp4"></video></div>
+                <div class="card-info"><span class="tag">Déco</span><h3>Tour Maison Paris</h3><p><i class="ph ph-armchair"></i> Ambiance cosy et détails</p></div>
+            </div>
+            <div class="video-card">
+                <div class="video-wrapper"><video controls><source src="video-life-3.mp4" type="video/mp4"></video></div>
+                <div class="card-info"><span class="tag">Routine</span><h3>Morning Routine</h3><p><i class="ph ph-sun"></i> Placement produit subtil</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="outdoor" class="category-section">
+        <div class="cat-header">
+            <div class="cat-icon-box"><i class="ph-fill ph-plant"></i></div>
+            <h2 class="cat-title">Outdoor & Voyage</h2>
+        </div>
+        <div class="grid-3">
+            <div class="video-card">
+                <div class="video-wrapper"><video controls><source src="video-out-1.mp4" type="video/mp4"></video></div>
+                <div class="card-info"><span class="tag">Voyage</span><h3>Vlog Corse</h3><p><i class="ph ph-airplane"></i> Paysages et cinématique</p></div>
+            </div>
+            <div class="video-card">
+                <div class="video-wrapper"><video controls><source src="video-out-2.mp4" type="video/mp4"></video></div>
+                <div class="card-info"><span class="tag">Sport</span><h3>Tenue de Sport</h3><p><i class="ph ph-sneaker"></i> Test en mouvement extérieur</p></div>
+            </div>
+            <div class="video-card">
+                <div class="video-wrapper"><video controls><source src="video-out-3.mp4" type="video/mp4"></video></div>
+                <div class="card-info"><span class="tag">Activité</span><h3>Sortie Week-end</h3><p><i class="ph ph-camera"></i> Format vlog dynamique</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tarifs" class="pricing-section">
+        <div style="text-align: center; margin-bottom: 3rem;">
+            <h2 style="font-size: 2.5rem; color: var(--text);">Investissement</h2>
+            <p>Des tarifs clairs, sans coûts cachés.</p>
+        </div>
+        
+        <div class="pricing-container">
+            <div class="price-card">
+                <i class="ph-duotone ph-instagram-logo price-icon"></i>
+                <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--text);">Contenu Organique</h3>
+                <div class="price-list">
+                    <div><span>1 Vidéo</span> <strong>190€</strong></div>
+                    <div><span>3 Vidéos (-10%)</span> <strong>513€</strong></div>
+                    <div><span>5 Vidéos (-10%)</span> <strong>855€</strong></div>
+                    <div><span>10 Vidéos (-10%)</span> <strong>1710€</strong></div>
+                </div>
+            </div>
+
+            <div class="price-card" style="border: 2px solid var(--primary);">
+                <div style="text-align: center; margin-bottom: 1rem; color: var(--primary); font-weight: 800; font-size: 0.75rem; letter-spacing: 1px; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                    <i class="ph-fill ph-crown"></i> DROITS INCLUS (6 MOIS)
+                </div>
+                <i class="ph-duotone ph-rocket price-icon"></i>
+                <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--text);">Publicité (Ads)</h3>
+                <div class="price-list">
+                    <div><span>1 Vidéo</span> <strong>250€</strong></div>
+                    <div><span>3 Vidéos</span> <strong>750€</strong></div>
+                    <div><span>5 Vidéos</span> <strong>1150€</strong></div>
+                    <div><span>10 Vidéos</span> <strong>2300€</strong></div>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 3rem; color: var(--text-light); font-size: 0.9rem;">
+            <i class="ph ph-info"></i> Suppléments : Script (50€) • Hook/CTA supp (25€) • Personne sup (100€)
         </div>
     </section>
 
     <footer>
-        <div class="container">
-            <p>&copy; 2024 Ethan Pougary. Tous droits réservés.</p>
+        <h2 style="font-size: 2rem; margin-bottom: 2rem;">Prête à collaborer ?</h2>
+        <a href="mailto:ugcfanny@gmail.com" class="cta-main">
+            <i class="ph-bold ph-envelope-simple"></i>
+            Envoyer un mail
+        </a>
+        <div style="margin-top: 3rem; opacity: 0.5; font-size: 0.8rem;">
+            © 2025 Fanny UGC • Paris / Corse • Tous droits réservés.
         </div>
     </footer>
 
+    <script>
+        const btn = document.getElementById('themeBtn');
+        const html = document.documentElement;
+
+        // Fonction pour basculer le thème
+        btn.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            
+            if (currentTheme === 'light') {
+                html.setAttribute('data-theme', 'dark');
+                btn.innerHTML = '<i class="ph-fill ph-sun"></i> Mode Clair';
+            } else {
+                html.setAttribute('data-theme', 'light');
+                btn.innerHTML = '<i class="ph-fill ph-moon"></i> Mode Sombre';
+            }
+        });
+    </script>
 </body>
-</html>s
+</html>
